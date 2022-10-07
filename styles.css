@@ -5,6 +5,37 @@ body {
 }
  
 h1 {
-    background-color: honeydew;
     text-align: center;
+}
+
+.btn {
+    width: 60px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: azure;
+}
+
+.misckeys .btn {
+    background-color: lightgray;
+}
+
+.rightside .btn {
+    background-color: lightgray;
+}
+
+#total {
+    background-color: lightpink;
+}
+
+.keypad {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.leftside {
+    display: flex;
+    flex-wrap: wrap;
+
 }
