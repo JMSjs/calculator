@@ -9,8 +9,9 @@ h1 {
 }
 
 .container {
-    width: 50%;
-    height: 50%;
+    margin: 0px auto;
+    padding: 10px;
+    width: 265px;
     border: 8px solid gray;
 }
 .btn {
@@ -32,19 +33,12 @@ h1 {
     text-align: right;
 }
 
-.misckeys, .numkeys {
+.keypad {
     display: flex;
-}
-
-.numkeys {
     flex-wrap: wrap;
 }
 
-.misckeys .btn {
-    background-color: azure;
-}
-
-.rightside .btn {
+.actions {
     background-color: azure;
 }
 
