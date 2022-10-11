@@ -13,7 +13,7 @@ let num1 = 0;
 let num2 = 0;
 let operatorChosen = null;
 let solution = 0;
-let displayNumber = 0;
+let displayNumber = "";
 
 const operate = (num1, num2, operator) => {
     switch(operator) {
@@ -34,7 +34,7 @@ btnPercent.addEventListener("click", () => {
 
 const btnClear = document.querySelector("#clear");
 btnClear.addEventListener("click", () => {
-    displayNumber = 0;
+    displayNumber = "";
     num1 = 0;
     num2 = 0;
     operatorChosen = null;
@@ -47,7 +47,7 @@ const btnBack = document.querySelector("#backspace");
 btnBack.addEventListener("click", () => {
     displayNumber = displayLine.textContent.slice(0,-1);
     if (!displayNumber) { //prevents user from deleting the entire display.
-        displayNumber = 0; 
+        displayNumber = ""; 
     }
     refresh();
 });
@@ -58,25 +58,35 @@ btnToggleNeg.addEventListener("click", () => {
     refresh();
 });
 
-const btnDecimal = document.querySelector("#decimal");
-btnDecimal.addEventListener("click", () => {
-    displayLine.textContent = displayLine.textContent + ".";
-})
+// const btnDecimal = document.querySelector("#.");
+// btnDecimal.addEventListener("click", () => {
+//     displayLine.textContent = displayLine.textContent + ".";
+// })
+
 
 const numKeys = document.querySelectorAll(".numkeys");
 numKeys.forEach((number) => number.addEventListener("click", function(e) {
     let keyClicked = e.target.id;
-    displayNumber = parseFloat(displayNumber+ keyClicked);
+    if (keyClicked == ".") {
+        console.log("checking decimal...");
+        if (displayLine.textContent.includes(".")) {
+            console.log("decimal input blocked");
+            return;
+        }
+    }
+    displayNumber = (displayNumber+ keyClicked);
+    console.log(keyClicked , typeof(keyClicked), displayNumber);
+
     displayLine.textContent = displayNumber;
 }))
 
 const operKeys = document.querySelectorAll(".oper");
 operKeys.forEach((operator) => operator.addEventListener("click", function(e) {
     operatorChosen = e.target.id;
-    operKeys.forEach(button => button.classList.remove("highlight"));
-    this.classList.add("highlight");
+    operKeys.forEach(button => button.classList.remove("highlight")); //resets colors on all operator btns
+    this.classList.add("highlight"); //color cue to show active operator
     num1 = parseFloat(displayLine.textContent);
-    displayNumber = 0;
+    displayNumber = "";
     refresh();
     console.log(num1 , "for" , operatorChosen);
 }));
