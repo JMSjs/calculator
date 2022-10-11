@@ -58,20 +58,12 @@ btnToggleNeg.addEventListener("click", () => {
     refresh();
 });
 
-// const btnDecimal = document.querySelector("#.");
-// btnDecimal.addEventListener("click", () => {
-//     displayLine.textContent = displayLine.textContent + ".";
-// })
-
-
 const numKeys = document.querySelectorAll(".numkeys");
 numKeys.forEach((number) => number.addEventListener("click", function(e) {
     let keyClicked = e.target.id;
     if (keyClicked == ".") {
-        console.log("checking decimal...");
         if (displayLine.textContent.includes(".")) {
-            console.log("decimal input blocked");
-            return;
+            return; //if decimal exists, event returns nothing
         }
     }
     displayNumber = (displayNumber+ keyClicked);
@@ -99,7 +91,7 @@ btnTotal.addEventListener("click", () => {
     }
     solution = operate(num1, num2, operatorChosen);
     console.log(`${num1} ${operatorChosen} ${num2} = ${solution}`);
-    displayLine.textContent = solution;
+    displayLine.textContent = (Math.round(1000*solution)/1000); //rounds to the nearest thousandth
     num2 = null;
     operKeys.forEach(button => button.classList.remove("highlight"));
 });
