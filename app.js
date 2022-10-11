@@ -3,10 +3,15 @@ const subtract = (num1, num2) => (num1 - num2);
 const multiply = (num1, num2) => (num1 * num2);
 const divide = (num1, num2) => {
     if (num2 === 0) {
-        return "error";
+        return "error"; //can't divide by zero
+        refresh();
     }
     return (num1 / num2);
-}
+};
+
+let num1 = 0;
+let num2 = 0;
+let solution = 0;
 let displayNumber = 0;
 
 const operate = (num1, num2, operator) => {
@@ -60,5 +65,12 @@ numKeys.forEach((number) => number.addEventListener("click", function(e) {
     let keyClicked = e.target.id;
     console.log(keyClicked);
     displayNumber = parseFloat(displayNumber+ keyClicked);
-    displayLine.textContent = displayNumber
+    displayLine.textContent = displayNumber;
+    num1 = displayNumber;
 }))
+
+const operKeys = document.querySelectorAll(".oper");
+operKeys.forEach((operator) => operator.addEventListener("click", function(e) {
+    operatorChosen = e.target.id;
+    console.log(num1,num2, operatorChosen);
+}));
