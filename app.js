@@ -28,20 +28,25 @@ const refresh = () => displayLine.textContent = displayNumber;
 
 const btnPercent = document.querySelector("#percent");
 btnPercent.addEventListener("click", () => {
-    displayNumber = displayNumber/100;
+    displayNumber = parseFloat(displayLine.textContent)/100;
     refresh();
  });
 
 const btnClear = document.querySelector("#clear");
 btnClear.addEventListener("click", () => {
     displayNumber = 0;
+    num1 = 0;
+    num2 = 0;
+    operatorChosen = null;
+    solution = 0;
+    operKeys.forEach(button => button.classList.remove("highlight"));
     refresh();
 });
 
 const btnBack = document.querySelector("#backspace");
 btnBack.addEventListener("click", () => {
     displayNumber = displayLine.textContent.slice(0,-1);
-    if (!displayNumber || displayNumber) { //prevents user from deleting the entire display.
+    if (!displayNumber) { //prevents user from deleting the entire display.
         displayNumber = 0; 
     }
     refresh();
@@ -49,7 +54,7 @@ btnBack.addEventListener("click", () => {
 
 const btnToggleNeg = document.querySelector("#toggleNeg");
 btnToggleNeg.addEventListener("click", () => {
-    displayNumber = displayNumber*(-1);
+    displayNumber = displayLine.textContent*(-1);
     refresh();
 });
 
@@ -68,9 +73,11 @@ numKeys.forEach((number) => number.addEventListener("click", function(e) {
 const operKeys = document.querySelectorAll(".oper");
 operKeys.forEach((operator) => operator.addEventListener("click", function(e) {
     operatorChosen = e.target.id;
+    operKeys.forEach(button => button.classList.remove("highlight"));
+    this.classList.add("highlight");
     num1 = parseFloat(displayLine.textContent);
     displayNumber = 0;
-    displayLine.textContent = `[${operatorChosen}]`;
+    refresh();
     console.log(num1 , "for" , operatorChosen);
 }));
 
@@ -84,5 +91,5 @@ btnTotal.addEventListener("click", () => {
     console.log(`${num1} ${operatorChosen} ${num2} = ${solution}`);
     displayLine.textContent = solution;
     num2 = null;
-    
+    operKeys.forEach(button => button.classList.remove("highlight"));
 });
