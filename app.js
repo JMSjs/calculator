@@ -1,9 +1,9 @@
-const add = (num1,num2) => (num1 + num2);
+const add = (num1,num2) => (parseFloat(num1) + parseFloat(num2));
 const subtract = (num1, num2) => (num1 - num2);
 const multiply = (num1, num2) => (num1 * num2);
 const divide = (num1, num2) => {
-    if (num2 === 0) {
-        return "error"; //can't divide by zero
+    if (num2 == 0) {
+        return "divide by zero :("; //can't divide by zero
         refresh();
     }
     return (num1 / num2);
@@ -11,15 +11,16 @@ const divide = (num1, num2) => {
 
 let num1 = 0;
 let num2 = 0;
+let operatorChosen = null;
 let solution = 0;
 let displayNumber = 0;
 
 const operate = (num1, num2, operator) => {
     switch(operator) {
-        case add: return add(num1,num2);
-        case subtract: return subtract(num1,num2);
-        case multiply: return multiply(num1,num2);
-        case divide: return divide(num1,num2);
+        case "add": return add(num1,num2);
+        case "subtract": return subtract(num1,num2);
+        case "multiply": return multiply(num1,num2);
+        case "divide": return divide(num1,num2);
     }
 };
 const displayLine = document.querySelector(".displayLine");
@@ -39,13 +40,12 @@ btnClear.addEventListener("click", () => {
 
 const btnBack = document.querySelector("#backspace");
 btnBack.addEventListener("click", () => {
-    console.log(displayNumber);
+    displayNumber = displayLine.textContent.slice(0,-1);
+    if (!displayNumber || displayNumber) { //prevents user from deleting the entire display.
+        displayNumber = 0; 
+    }
+    refresh();
 });
-
-const btnDivide = document.querySelector("#divide");
-const btnMultiply = document.querySelector("#multiply");
-const btnSubtract = document.querySelector("#subtract");
-const btnAdd = document.querySelector("#add");
 
 const btnToggleNeg = document.querySelector("#toggleNeg");
 btnToggleNeg.addEventListener("click", () => {
@@ -57,20 +57,32 @@ const btnDecimal = document.querySelector("#decimal");
 btnDecimal.addEventListener("click", () => {
     displayLine.textContent = displayLine.textContent + ".";
 })
-const btnTotal = document.querySelector("#total");
-
 
 const numKeys = document.querySelectorAll(".numkeys");
 numKeys.forEach((number) => number.addEventListener("click", function(e) {
     let keyClicked = e.target.id;
-    console.log(keyClicked);
     displayNumber = parseFloat(displayNumber+ keyClicked);
     displayLine.textContent = displayNumber;
-    num1 = displayNumber;
 }))
 
 const operKeys = document.querySelectorAll(".oper");
 operKeys.forEach((operator) => operator.addEventListener("click", function(e) {
     operatorChosen = e.target.id;
-    console.log(num1,num2, operatorChosen);
+    num1 = parseFloat(displayLine.textContent);
+    displayNumber = 0;
+    displayLine.textContent = `[${operatorChosen}]`;
+    console.log(num1 , "for" , operatorChosen);
 }));
+
+const btnTotal = document.querySelector("#total");
+btnTotal.addEventListener("click", () => {
+    num2 = displayLine.textContent;
+    if (!parseFloat(num2)) {
+        num2 = 0;
+    }
+    solution = operate(num1, num2, operatorChosen);
+    console.log(`${num1} ${operatorChosen} ${num2} = ${solution}`);
+    displayLine.textContent = solution;
+    num2 = null;
+    
+});
