@@ -4,7 +4,7 @@ const multiply = (num1, num2) => (num1 * num2);
 const divide = (num1, num2) => {
     if (num2 == 0) {
         return "divide by zero :("; //can't divide by zero
-        refresh();
+        
     }
     return (num1 / num2);
 };
@@ -60,6 +60,14 @@ btnToggleNeg.addEventListener("click", () => {
 
 const numKeys = document.querySelectorAll(".numkeys");
 numKeys.forEach((number) => number.addEventListener("click", function(e) {
+    // this condition below is to prevent inputs from overflowing the display line. 13 digits max. button blinks red to alert user
+    if (displayNumber.length >= 13) { 
+        this.classList.add("error");
+        setTimeout(function() {
+            number.classList.remove("error");
+        }, 60);
+        return;
+    }
     let keyClicked = e.target.id;
     if (keyClicked == ".") {
         if (displayLine.textContent.includes(".")) {
@@ -86,12 +94,19 @@ operKeys.forEach((operator) => operator.addEventListener("click", function(e) {
 const btnTotal = document.querySelector("#total");
 btnTotal.addEventListener("click", () => {
     num2 = displayLine.textContent;
-    if (!parseFloat(num2)) {
-        num2 = 0;
+    if (!parseFloat(num1)) { 
+        num1 = 0; 
+    }
+    if (!parseFloat(num2)) { 
+        num2 = 0; 
     }
     solution = operate(num1, num2, operatorChosen);
     console.log(`${num1} ${operatorChosen} ${num2} = ${solution}`);
-    displayLine.textContent = (Math.round(1000*solution)/1000); //rounds to the nearest thousandth
+    if (parseFloat(solution)) {
+        displayLine.textContent = (Math.round(1000*solution)/1000); //rounds to the nearest thousandth
+    } else {
+        displayLine.textContent = solution;
+    }
     num2 = null;
     operKeys.forEach(button => button.classList.remove("highlight"));
 });
