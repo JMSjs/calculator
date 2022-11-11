@@ -1,88 +1,88 @@
 body {
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    width: 100%;
-    height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  width: 100%;
+  height: 100%;
 }
- 
+
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 .container {
-    margin: 0px auto;
-    padding: 10px;
-    width: 265px;
-    border: 8px solid gray;
-    box-shadow: 5px 5px 10px; /*cool shadow for box*/
-
+  margin: 0px auto;
+  padding: 10px;
+  width: 265px;
+  border: 8px solid gray;
+  box-shadow: 5px 5px 10px; /*cool shadow for box*/
 }
 .btn {
-    width: 60px;
-    height: 50px;
-    border: 1px solid black;
-    border-radius: 4px;
-    margin: 2px;
-    text-align: center;
-    line-height: 50px; 
-    background-color: rgb(226, 226, 226); 
-    transition: all .06s ease;
+  width: 60px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 4px;
+  margin: 2px;
+  text-align: center;
+  line-height: 50px;
+  background-color: rgb(226, 226, 226);
+  transition: all 0.06s ease;
 }
 
 .btn:hover {
-    filter: brightness(75%); /*basic effect for mouse-over*/
+  filter: brightness(75%); /*basic effect for mouse-over*/
 }
 
 .btn:active {
-    box-shadow: inset 0 0 10px grey; /*basic effect for button-click*/
+  box-shadow: inset 0 0 10px grey; /*basic effect for button-click*/
 }
 
 .displayLine {
-    height: 60px;
-    line-height: 60px; 
-    margin: 2px;
-    margin-bottom: 10px;
-    padding: auto 4px;
-    padding-right: 10px;
-    border: 3px solid gray;
-    font-size: 2em;
-    text-align: right;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    overflow:auto;
+  height: 60px;
+  line-height: 60px;
+  margin: 2px;
+  margin-bottom: 10px;
+  padding: auto 4px;
+  padding-right: 10px;
+  border: 3px solid gray;
+  font-size: 2em;
+  text-align: right;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  overflow: auto;
 }
 
 .keypad {
-    display: flex;
-    flex-wrap: wrap;
-    user-select: none;
+  display: flex;
+  flex-wrap: wrap;
+  user-select: none;
 }
 
-.actions, .oper {
-    background-color: azure;
+.actions,
+.oper {
+  background-color: azure;
 }
 
 #total {
-    background-color: lightpink;
+  background-color: lightpink;
 }
 
 #total:hover {
-    filter: brightness(75%);
-
+  filter: brightness(75%);
 }
 
 footer {
-    font-size: .75em;
-    margin: 10px;
-    margin-top: 40px;
-    text-align: center;
+  font-size: 0.75em;
+  margin: 10px;
+  margin-top: 40px;
+  text-align: center;
 }
 
 .highlight {
-    background-color: lightblue; /*basic effect for "active" operator*/
-    box-shadow: inset 0 0 10px grey; 
+  background-color: lightblue; /*basic effect for "active" operator*/
+  box-shadow: inset 0 0 10px grey;
 }
 
 .error {
-    background-color: red;
+  background-color: red;
 }
