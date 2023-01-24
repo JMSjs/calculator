@@ -38,8 +38,8 @@ btnPercent.addEventListener("click", () => {
 const btnClear = document.querySelector("#clear");
 btnClear.addEventListener("click", () => {
   displayNumber = "";
-  num1 = 0;
-  num2 = 0;
+  num1 = null;
+  num2 = null;
   operatorChosen = null;
   solution = 0;
   operKeys.forEach((button) => button.classList.remove("highlight"));
@@ -89,18 +89,23 @@ numKeys.forEach((number) =>
 const operKeys = document.querySelectorAll(".oper");
 operKeys.forEach((operator) =>
   operator.addEventListener("click", function (e) {
+    if (num1) {
+      num2 = parseFloat(displayLine.textContent);
+      calculate_And_Display();
+    } else {
+      num1 = parseFloat(displayLine.textContent);
+    }
     operatorChosen = e.target.id;
     operKeys.forEach((button) => button.classList.remove("highlight")); // resets colors on all operator btns
     this.classList.add("highlight"); // color cue to show active operator
-    num1 = parseFloat(displayLine.textContent);
     displayNumber = "";
-    refresh();
-    console.log(num1, "for", operatorChosen);
   })
 );
 
 const btnTotal = document.querySelector("#total");
-btnTotal.addEventListener("click", () => {
+btnTotal.addEventListener("click", () => calculate_And_Display());
+
+const calculate_And_Display = () => {
   num2 = displayLine.textContent;
   if (!parseFloat(num1)) {
     num1 = 0;
@@ -115,6 +120,8 @@ btnTotal.addEventListener("click", () => {
   } else {
     displayLine.textContent = solution;
   }
+  num1 = solution;
   num2 = null;
+  displayNumber = "";
   operKeys.forEach((button) => button.classList.remove("highlight"));
-});
+}
